@@ -36,3 +36,20 @@ Aplikasi ini menyediakan beberapa bagian utama:
 - Saran penanganan awal
 - Daftar Top 5 prediksi
 
+##🚀 Instalasi
+1. Clone repository
+git clone https://github.com/username-kamu/skin-disease-classifier.git
+cd skin-disease-classifier
+
+2. Buat virtual environment
+python -m venv venv
+venv\Scripts\activate
+
+3. Install dependency
+pip install -r requirements.txt
+
+## ▶️ Menjalankan Aplikasi
+python app.py
+
+Kemudian buka browser:
+http://127.0.0.1:5000
