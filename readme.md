@@ -1,23 +1,3 @@
----
-## 📌 Fitur
-- Upload gambar kondisi kulit melalui tampilan web
-- Klasifikasi gambar menggunakan model YOLO `.pt`
-- Menampilkan prediksi utama beserta confidence score
-- Menampilkan Top 5 hasil prediksi
-- Menampilkan deskripsi penyakit dan saran penanganan awal
-- Dapat dijalankan secara lokal di komputer sendiri
-- Tidak memerlukan Google Colab
-- Tidak memerlukan ngrok untuk penggunaan localhost
----
-## 🖼️ Tampilan Aplikasi
-Aplikasi ini menyediakan beberapa bagian utama:
-- Area upload gambar
-- Preview gambar yang diunggah
-- Tombol analisis gambar
-- Hasil prediksi utama
-- Deskripsi penyakit
-- Saran penanganan awal
-- Daftar Top 5 prediksi
 # 🩺 Skin Disease Classifier
 
 Aplikasi web untuk klasifikasi penyakit kulit berbasis **Flask** dan **Ultralytics YOLO**.
@@ -58,11 +38,21 @@ Aplikasi ini menyediakan beberapa bagian utama:
 
 ## 🚀 Quick Start (Windows)
 
+Jika Anda belum memiliki salinan proyek di komputer, clone repo terlebih dahulu (butuh Git):
+
+```powershell
+# Contoh: ganti dengan URL repo Anda
+git clone https://github.com/your-username/your-repo.git
+cd skin-disease-app
+```
+
+Jika belum memasang Git di Windows, unduh dan pasang dari https://git-scm.com/download/win
+
 1. Buat virtual environment dan aktifkan:
 
 ```powershell
 python -m venv venv
-venv\Scripts\Activate.ps1   # PowerShell
+venv\\Scripts\\Activate.ps1   # PowerShell
 ```
 
 2. Instal dependensi:
@@ -168,4 +158,5 @@ Repository ini tidak menyertakan skrip pelatihan. Untuk melatih ulang, gunakan p
 
 ---
 
+Ingin saya tambahkan badge, contoh dataset, atau instruksi pelatihan detil? Beri tahu saya langkah yang Anda inginkan selanjutnya.
 
