@@ -36,7 +36,7 @@ Aplikasi ini menyediakan beberapa bagian utama:
 - Saran penanganan awal
 - Daftar Top 5 prediksi
 
-##🚀 Instalasi
+## 🚀 Instalasi
 1. Clone repository
 git clone https://github.com/username-kamu/skin-disease-classifier.git
 cd skin-disease-classifier
