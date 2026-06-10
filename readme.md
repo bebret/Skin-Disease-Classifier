@@ -1,12 +1,32 @@
+---
+## 📌 Fitur
+- Upload gambar kondisi kulit melalui tampilan web
+- Klasifikasi gambar menggunakan model YOLO `.pt`
+- Menampilkan prediksi utama beserta confidence score
+- Menampilkan Top 5 hasil prediksi
+- Menampilkan deskripsi penyakit dan saran penanganan awal
+- Dapat dijalankan secara lokal di komputer sendiri
+- Tidak memerlukan Google Colab
+- Tidak memerlukan ngrok untuk penggunaan localhost
+---
+## 🖼️ Tampilan Aplikasi
+Aplikasi ini menyediakan beberapa bagian utama:
+- Area upload gambar
+- Preview gambar yang diunggah
+- Tombol analisis gambar
+- Hasil prediksi utama
+- Deskripsi penyakit
+- Saran penanganan awal
+- Daftar Top 5 prediksi
 # 🩺 Skin Disease Classifier
 
 Aplikasi web untuk klasifikasi penyakit kulit berbasis **Flask** dan **Ultralytics YOLO**.
 
 Aplikasi ini memungkinkan pengguna untuk mengunggah gambar kondisi kulit, lalu sistem akan memberikan hasil prediksi berbasis AI berupa kelas penyakit, tingkat confidence, deskripsi, serta saran penanganan awal.
 
-> ⚠️ **Disclaimer Medis:**  
-> Aplikasi ini hanya dibuat untuk tujuan edukasi dan informasi.  
-> Hasil prediksi dari AI **bukan diagnosis medis resmi**.  
+> ⚠️ **Disclaimer Medis:**
+> Aplikasi ini hanya dibuat untuk tujuan edukasi dan informasi.
+> Hasil prediksi dari AI **bukan diagnosis medis resmi**.
 > Selalu konsultasikan kondisi kulit kepada dokter atau dokter spesialis kulit untuk pemeriksaan dan penanganan yang tepat.
 
 ---
@@ -19,8 +39,6 @@ Aplikasi ini memungkinkan pengguna untuk mengunggah gambar kondisi kulit, lalu s
 - Menampilkan Top 5 hasil prediksi
 - Menampilkan deskripsi penyakit dan saran penanganan awal
 - Dapat dijalankan secara lokal di komputer sendiri
-- Tidak memerlukan Google Colab
-- Tidak memerlukan ngrok untuk penggunaan localhost
 
 ---
 
@@ -36,20 +54,118 @@ Aplikasi ini menyediakan beberapa bagian utama:
 - Saran penanganan awal
 - Daftar Top 5 prediksi
 
-## 🚀 Instalasi
-1. Clone repository
-git clone https://github.com/username-kamu/skin-disease-classifier.git
-cd skin-disease-classifier
+---
 
-2. Buat virtual environment
+## 🚀 Quick Start (Windows)
+
+1. Buat virtual environment dan aktifkan:
+
+```powershell
 python -m venv venv
-venv\Scripts\activate
+venv\Scripts\Activate.ps1   # PowerShell
+```
 
-3. Install dependency
+2. Instal dependensi:
+
+```powershell
 pip install -r requirements.txt
+```
 
-## ▶️ Menjalankan Aplikasi
+3. Letakkan file model `model.pt` di direktori proyek (sama dengan `app.py`).
+
+4. Jalankan aplikasi:
+
+```powershell
 python app.py
+```
 
-Kemudian buka browser:
-http://127.0.0.1:5000
+5. Buka browser ke: http://127.0.0.1:5000
+
+---
+
+## 📁 Struktur Proyek
+
+- `app.py` : server Flask + template HTML/JS (UI & endpoint `/predict`).
+- `model.pt` : model terlatih (letakkan di root proyek).
+- `requirements.txt` : daftar paket Python.
+- `Software Engineering/` : materi pendukung (jika ada).
+
+---
+
+## ⚙️ Dependensi
+
+Disediakan di `requirements.txt`:
+
+- `ultralytics`
+- `flask`
+- `pillow`
+
+Catatan: beberapa instalasi `ultralytics` mungkin memerlukan `torch` terpasang secara eksplisit. Jika Anda ingin memanfaatkan GPU, pasang `torch` sesuai versi CUDA Anda:
+
+```powershell
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
+```
+
+---
+
+## 📡 API
+
+- POST `/predict`
+	- Form field: `image` (file)
+	- Response: JSON `{ "predictions": {"ClassName": probability, ...} }`
+
+Contoh `curl`:
+
+```bash
+curl -X POST -F "image=@/path/to/image.jpg" http://127.0.0.1:5000/predict
+```
+
+Contoh respons:
+
+```json
+{
+	"predictions": {
+		"Acne": 0.72,
+		"Eczema": 0.12
+	}
+}
+```
+
+---
+
+## 🛠️ Penjelasan Teknis Singkat
+
+- `app.py` memuat model dengan `ultralytics.YOLO(MODEL_PATH)`.
+- Untuk inferensi, kode memanggil `model(image, imgsz=416)` dan mengambil `results[0].probs`.
+- Frontend adalah HTML yang dirender dari `app.py` (template string). Hasil diproses di JavaScript untuk menampilkan Top-5 dan detail per kelas.
+
+---
+
+## 🧩 Penempatan Model
+
+Pastikan `model.pt` ada di folder yang sama dengan `app.py`. Jika model punya nama atau lokasi berbeda, ubah variabel `MODEL_PATH` di `app.py`.
+
+---
+
+## ❗ Troubleshooting
+
+- Jika aplikasi tidak menemukan model: cek nama file dan path `MODEL_PATH` di `app.py`.
+- Jika `ultralytics` error terkait PyTorch: install `torch` versi yang kompatibel.
+- Jika ingin akses dari device lain di jaringan lokal, ganti `host="127.0.0.1"` di `app.run()` ke `0.0.0.0` (perhatikan aspek keamanan).
+
+---
+
+## 📚 Pengembangan & Training
+
+Repository ini tidak menyertakan skrip pelatihan. Untuk melatih ulang, gunakan pipeline Ultralytics/YOLO dengan dataset berlabel, hasilkan checkpoint `.pt`, lalu ganti `model.pt`.
+
+---
+
+## 📄 Lisensi & Kontak
+
+- Tambahkan file `LICENSE` jika perlu (mis. MIT/Apache).
+- Untuk pertanyaan atau permintaan fitur, tambahkan issues atau hubungi pemilik proyek.
+
+---
+
+
